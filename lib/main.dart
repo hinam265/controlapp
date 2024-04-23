@@ -1,10 +1,11 @@
+import 'package:controlapp/providers/mapprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'providers/appstateprovider.dart';
 import 'providers/settingsprovider.dart';
-import 'providers/firebasemsgprovider.dart';
+import 'providers/odomprovider.dart';
 
 import 'screens/mainpage.dart';
 
@@ -15,7 +16,8 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => SettingsProvider()),
       ChangeNotifierProvider(create: (_) => AppStateProvider()),
-      ChangeNotifierProvider(create: (_) => FirebaseMsgProvider()),
+      ChangeNotifierProvider(create: (_) => OdomMsgProvider()),
+      ChangeNotifierProvider(create: (_) => MapMsgProvider()),
     ],
     child: const MyApp(),
   ));

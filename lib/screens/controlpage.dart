@@ -70,14 +70,4 @@ void joystickMove(Offset offset, BuildContext context) {
   final cmdVel = FirebaseDatabase.instance.ref().child('cmd_vel');
 
   cmdVel.set({'linear': -offset.dy * 0.4, 'angular': -offset.dx});
-
-  // var msg = Provider.of<RosProvider>(context, listen: false).velocityPublished;
-
-  // msg.linear.x = -offset.dy * 0.4;
-  // msg.angular.z = -offset.dx;
-
-  // var message = "linear.x: ${-offset.dy * 0.4}, angular.z: ${-offset.dx}";
-  // // msg.linear.x = -offset.dy * 0.4;
-  // // msg.angular.z = -offset.dx;
-  // var msg = Provider.of<MessageProvider>(context, listen: false).sendMessage(message);
 }

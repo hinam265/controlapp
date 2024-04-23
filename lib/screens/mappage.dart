@@ -1,16 +1,16 @@
 import 'dart:ui' as ui;
 
 import 'package:controlapp/components/mappainter.dart';
-import 'package:controlapp/providers/firebasemsgprovider.dart';
+import 'package:controlapp/providers/mapprovider.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:provider/provider.dart';
+// import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+// import 'package:provider/provider.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
   @override
-  _MapPageState createState() => _MapPageState();
+  State<MapPage> createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
@@ -25,15 +25,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             left: 0,
             right: 0,
             top: 0,
-            child: Container(
-                // color: Theme.of(context).canvasColor,
-                child: InteractiveViewer(
+            child: InteractiveViewer(
               maxScale: 10,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: Center(
                   child: FutureBuilder(
-                      future: FirebaseMsgProvider().getMapAsImage(
+                      future: MapMsgProvider().getMapAsImage(
                           Theme.of(context).primaryColor, Colors.black),
                       initialData: previousMap,
                       builder: (_, img) {
@@ -42,7 +40,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                       }),
                 ),
               ),
-            ))),
+            )),
         // Positioned(child: StatusInfo()),
         // Positioned(bottom: 52, left: 0, child: MapShelfButtons(),),
         // Positioned(bottom: 0, left: 0, right: 0, child: WaypointShelf()),

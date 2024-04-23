@@ -1,9 +1,9 @@
 import 'package:controlapp/models/odometrymessage.dart';
-import 'package:controlapp/models/waypoint.dart';
+// import 'package:controlapp/models/waypoint.dart';
 
 import 'package:provider/provider.dart';
-import 'package:controlapp/providers/waypointprovider.dart';
-import 'package:controlapp/providers/firebasemsgprovider.dart';
+// import 'package:controlapp/providers/waypointprovider.dart';
+import 'package:controlapp/providers/odomprovider.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
@@ -250,10 +250,10 @@ class MapPainter extends CustomPainter {
         radius * math.cos(radians(-angle)), radius * math.sin(radians(-angle)));
     Offset thirdPoint = Offset(
         radius * math.cos(radians(angle)), radius * math.sin(radians(angle)));
-    var rect = Rect.fromCircle(
-      center: const Offset(0, 0),
-      radius: radius,
-    );
+    // var rect = Rect.fromCircle(
+    //   center: const Offset(0, 0),
+    //   radius: radius,
+    // );
 
     shape.moveTo(firstPoint.dx, firstPoint.dy);
     shape.lineTo(secondPoint.dx, secondPoint.dy);
@@ -323,7 +323,7 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
             waveColor: Theme.of(context).brightness == Brightness.light
                 ? Colors.amberAccent
                 : Colors.cyanAccent,
-            robotOdom: Provider.of<FirebaseMsgProvider>(context).odometry,
+            robotOdom: Provider.of<OdomMsgProvider>(context).odometry,
             // waypoints: Provider.of<WaypointProvider>(context).waypoints,
             // activeWaypoint: Provider.of<W>(context).activeWaypoint
           ),
