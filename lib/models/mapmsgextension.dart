@@ -3,12 +3,12 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:controlapp/models/mapmessage.dart';
+import 'package:controlapp/models/occupancygrid.dart';
 
-extension CallMeBritney on MapMsg {
+extension CallMeBritney on OccupancyGrid {
   Uint8List toRGBA({required Color border, required Color fill}) {
     var buffor = BytesBuilder();
-    for (var value in mapdata) {
+    for (var value in data) {
       switch (value) {
         case -1:
           {

@@ -1,4 +1,4 @@
-import 'package:controlapp/models/odometrymessage.dart';
+import 'package:controlapp/models/odometry.dart';
 // import 'package:controlapp/models/waypoint.dart';
 
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class MapPainter extends CustomPainter {
   final double waveRadius;
   final Color waveAccentColor;
   final Color waveColor;
-  final OdometryMsg? robotOdom;
+  final Odometry robotOdom;
   final ui.Image map;
   // final WaypointList waypoints;
   // final Waypoint activeWaypoint;
@@ -125,8 +125,8 @@ class MapPainter extends CustomPainter {
         //     canvas.restore();
         //   }
         // }
-        double robotPositionX = (robotOdom!.positionX) / resolution;
-        double robotPositionY = (robotOdom!.positionY) / resolution;
+        double robotPositionX = (robotOdom.pose.position.x) / resolution;
+        double robotPositionY = (robotOdom.pose.position.y) / resolution;
 
         //draw robot
         var robotCenter = const Offset(0, 0);
@@ -172,11 +172,11 @@ class MapPainter extends CustomPainter {
           if (drawOnce) {
             canvas.save();
             var robotRotation = Quaternion(
-                robotOdom!.orientationX,
-                robotOdom!.orientationY,
-                robotOdom!.orientationZ,
-                robotOdom!.orientationW);
-            canvas.rotate(robotOdom!.orientationX < 0
+                robotOdom.pose.orientation.x,
+                robotOdom.pose.orientation.y,
+                robotOdom.pose.orientation.z,
+                robotOdom.pose.orientation.w);
+            canvas.rotate(robotOdom.pose.orientation.x < 0
                 ? robotRotation.radians
                 : -robotRotation.radians);
 
