@@ -36,7 +36,7 @@ class OccupancyGrid {
       {required this.header, required this.mapMetaData, required this.data});
 
   // Factory constructor for creating an instance from a decoded JSON response
-  factory OccupancyGrid.fromJson(Map<String, dynamic> response) {
+  factory OccupancyGrid.fromJson(Map<dynamic, dynamic> response) {
     List<dynamic> dataDynamicList = response["data"];
     List<int> dataIntList =
         dataDynamicList.map<int>((item) => item as int).toList();
@@ -59,7 +59,7 @@ class OccupancyGrid {
             y: response["info"]["origin"]["position"]["y"],
             z: response["info"]["origin"]["position"]["z"],
           ),
-          orientation: Orientation(
+          orientation: Orientations(
             x: response["info"]["origin"]["orientation"]["x"],
             y: response["info"]["origin"]["orientation"]["y"],
             z: response["info"]["origin"]["orientation"]["z"],

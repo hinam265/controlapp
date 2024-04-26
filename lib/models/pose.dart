@@ -6,19 +6,19 @@ class Position {
   Position({required this.x, required this.y, required this.z});
 }
 
-class Orientation {
+class Orientations {
   double x;
   double y;
   double z;
   double w;
 
-  Orientation(
+  Orientations(
       {required this.x, required this.y, required this.z, required this.w});
 }
 
 class Pose {
   Position position;
-  Orientation orientation;
+  Orientations orientation;
 
   Pose({required this.position, required this.orientation});
 }

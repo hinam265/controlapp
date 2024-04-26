@@ -20,7 +20,7 @@ extension CallMeBritney on OccupancyGrid {
             buffor.add([fill.red, fill.green, fill.blue, fill.alpha]);
             break;
           }
-        default:
+        case 100:
           {
             buffor.add([border.red, border.green, border.blue, border.alpha]);
             break;

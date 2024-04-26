@@ -22,7 +22,7 @@ class Odometry {
 
   Odometry({required this.header, required this.pose, required this.twist});
 
-  factory Odometry.fromJson(Map<String, dynamic> response) {
+  factory Odometry.fromJson(Map<dynamic, dynamic> response) {
     return Odometry(
       header: Header(
         frameId: response["header"]["frame_id"],
@@ -37,7 +37,7 @@ class Odometry {
           y: response["pose"]["pose"]["position"]["y"],
           z: response["pose"]["pose"]["position"]["z"],
         ),
-        orientation: Orientation(
+        orientation: Orientations(
           x: response["pose"]["pose"]["orientation"]["x"],
           y: response["pose"]["pose"]["orientation"]["y"],
           z: response["pose"]["pose"]["orientation"]["z"],

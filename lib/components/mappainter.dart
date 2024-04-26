@@ -64,18 +64,20 @@ class MapPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.save();
     {
-      // canvas.scale(1, -1);
-      // canvas.translate(0, map.height.toDouble());
+      canvas.scale(1, -1);
+      canvas.translate(0, map.height.toDouble());
 
       canvas.translate(map.width / 2, map.height / 2.5);
       canvas.rotate(radians(180));
+
       canvas.translate(-map.width / 2, -map.height / 2);
+
       canvas.scale(1, -1);
       canvas.translate(0, -map.height.toDouble());
 
       canvas.save();
       {
-        canvas.translate(-6, -6);
+        // canvas.translate(-6, -6);
         canvas.drawImage(map, Offset.zero, Paint());
       }
       canvas.restore();
@@ -86,7 +88,7 @@ class MapPainter extends CustomPainter {
         double centerY = map.height / 2;
         canvas.translate(centerX, centerY);
 
-        const resolution = 0.05;
+        const resolution = 0.05000000074505806;
 
         //Siatka do debugowania pozycji na mapie
         //region
@@ -164,6 +166,7 @@ class MapPainter extends CustomPainter {
           //         ..color = item.color.withOpacity(1));
           //   canvas.restore();
           // }
+
           //Drawing robot
           canvas.save();
           canvas.translate(robotPositionX, robotPositionY);
@@ -310,26 +313,30 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
           waveRadius = _animation.value;
         });
       });
-    return FittedBox(
-      child: SizedBox(
-        width: widget.map.width.toDouble(),
-        height: widget.map.height.toDouble(),
-        child: CustomPaint(
-          painter: MapPainter(
-            map: widget.map,
-            debugGrig: widget.showGrid,
-            waveRadius: waveRadius,
-            waveAccentColor: Theme.of(context).highlightColor,
-            waveColor: Theme.of(context).brightness == Brightness.light
-                ? Colors.amberAccent
-                : Colors.cyanAccent,
-            robotOdom: Provider.of<OdomMsgProvider>(context).odometry,
-            // waypoints: Provider.of<WaypointProvider>(context).waypoints,
-            // activeWaypoint: Provider.of<W>(context).activeWaypoint
-          ),
-        ),
-      ),
-    );
+    return Provider.of<OdomMsgProvider>(context).odometry == null
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : FittedBox(
+            child: SizedBox(
+              width: widget.map.width.toDouble(),
+              height: widget.map.height.toDouble(),
+              child: CustomPaint(
+                painter: MapPainter(
+                  map: widget.map,
+                  debugGrig: widget.showGrid,
+                  waveRadius: waveRadius,
+                  waveAccentColor: Theme.of(context).highlightColor,
+                  waveColor: Theme.of(context).brightness == Brightness.light
+                      ? Colors.amberAccent
+                      : Colors.cyanAccent,
+                  robotOdom: Provider.of<OdomMsgProvider>(context).odometry!,
+                  // waypoints: Provider.of<WaypointProvider>(context).waypoints,
+                  // activeWaypoint: Provider.of<W>(context).activeWaypoint
+                ),
+              ),
+            ),
+          );
   }
 
   @override
