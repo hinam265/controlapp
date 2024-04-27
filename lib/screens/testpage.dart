@@ -1,5 +1,7 @@
 import 'dart:async';
-// import 'dart:ui' as ui;
+import 'dart:ui' as ui;
+import 'package:controlapp/models/ogToImage.dart';
+import 'package:controlapp/providers/mapprovider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 // import 'package:controlapp/providers/mapprovider.dart';
@@ -9,7 +11,9 @@ import 'package:controlapp/models/occupancygrid.dart';
 import 'package:controlapp/models/occupancyGridToImageBytes.dart';
 import 'dart:typed_data';
 import 'package:controlapp/models/pose.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key});
@@ -35,6 +39,7 @@ class _TestPageState extends State<TestPage> {
       )));
   // late Uint8List pngImg;
   late String _displaytext = 'No data';
+  ui.Image? previousMap;
 
   @override
   void initState() {
@@ -74,16 +79,82 @@ class _TestPageState extends State<TestPage> {
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            InteractiveViewer(
-              maxScale: 10,
-              child: SizedBox(
-                width: double.infinity,
-                child: Center(
-                  child: Image.memory(pngImg),
-                ),
-              ),
-            )
+            Positioned(
+                bottom: 45,
+                left: 0,
+                right: 0,
+                top: 0,
+                child: Provider.of<MapMsgProvider>(context).mapImage == null
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : InteractiveViewer(
+                        maxScale: 10,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child:
+                              // Image.memory(pngImg)
+
+                              Center(
+                                  child: FutureBuilder(
+                                      future: getMapAsImage(
+                                          Provider.of<MapMsgProvider>(context)
+                                              .mapImage!,
+                                          Theme.of(context).primaryColor,
+                                          Colors.black),
+                                      initialData: previousMap,
+                                      builder: (_, img) {
+                                        previousMap = img.data;
+                                        return img.data == null
+                                            ? const CircularProgressIndicator()
+                                            : MyPainter(map: img.data!);
+                                      })),
+                        ),
+                      ))
           ],
         ));
+  }
+}
+
+class MyPainter extends StatefulWidget {
+  const MyPainter({super.key, required this.map});
+  final ui.Image map;
+
+  @override
+  State<MyPainter> createState() => _MyPainterState();
+}
+
+class _MyPainterState extends State<MyPainter> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   loadImage();
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: MyCanvas(map: widget.map),
+    );
+  }
+}
+
+// void loadImage() {
+//   decodeImageFromList()
+// }
+
+class MyCanvas extends CustomPainter {
+  final ui.Image map;
+
+  MyCanvas({super.repaint, required this.map});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawImage(map, Offset.zero, Paint());
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }

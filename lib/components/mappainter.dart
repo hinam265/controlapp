@@ -64,8 +64,8 @@ class MapPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.save();
     {
-      canvas.scale(1, -1);
-      canvas.translate(0, map.height.toDouble());
+      canvas.scale(-1, -1);
+      // canvas.translate(0, map.height.toDouble());
 
       canvas.translate(map.width / 2, map.height / 2.5);
       canvas.rotate(radians(180));

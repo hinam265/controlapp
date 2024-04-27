@@ -1,15 +1,10 @@
-import 'dart:convert';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:controlapp/components/mappainter.dart';
 import 'package:controlapp/providers/mapprovider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'dart:async';
+
 import 'package:controlapp/models/ogToImage.dart';
-import 'package:controlapp/models/occupancyGridToImageBytes.dart';
 
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';

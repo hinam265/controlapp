@@ -45,7 +45,6 @@ class _JoystickConfigurationPortrait extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
           color: Theme.of(context).primaryColor,
