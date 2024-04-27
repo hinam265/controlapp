@@ -25,7 +25,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       fit: StackFit.expand,
       children: <Widget>[
         Positioned(
-            bottom: 45,
+            bottom: 0,
             left: 0,
             right: 0,
             top: 0,

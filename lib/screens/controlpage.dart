@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:controlapp/components/controlpad.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:controlapp/screens/mappage.dart';
+import 'package:flutter/widgets.dart';
 
 class ControlPage extends StatelessWidget {
   ControlPage({super.key});
@@ -10,10 +13,22 @@ class ControlPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MediaQuery.of(context).orientation == Orientation.portrait
-          ? const _JoystickConfigurationPortrait()
-          : const SizedBox(),
-    );
+        body: Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height * (1 / 2),
+          width: MediaQuery.of(context).size.width,
+          child: MapPage(),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 3,
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+              color: Color.fromARGB(255, 31, 42, 161),
+              child: const _JoystickConfigurationPortrait()),
+        )
+      ],
+    ));
   }
 }
 
@@ -44,23 +59,19 @@ class _JoystickConfigurationPortrait extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          color: Theme.of(context).primaryColor,
-          // color: Theme.of(context).canvasColor,
-          height: MediaQuery.of(context).size.height / 3,
-          child: Center(
-            child: ControlPad(
-              baseSize: MediaQuery.of(context).size.height / 3.9,
-              stickSize: MediaQuery.of(context).size.height / 3.9 * 0.4,
-              onStickMove: (offset) {
-                joystickMove(offset, context);
-              },
-            ),
-          ),
+    return Container(
+      color: Theme.of(context).primaryColor,
+      // color: Theme.of(context).canvasColor,
+      height: MediaQuery.of(context).size.height / 3,
+      child: Center(
+        child: ControlPad(
+          baseSize: MediaQuery.of(context).size.height / 3.9,
+          stickSize: MediaQuery.of(context).size.height / 3.9 * 0.4,
+          onStickMove: (offset) {
+            joystickMove(offset, context);
+          },
         ),
-      ],
+      ),
     );
   }
 }
