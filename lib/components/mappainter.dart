@@ -77,7 +77,7 @@ class MapPainter extends CustomPainter {
 
       canvas.save();
       {
-        // canvas.translate(-6, -6);
+        canvas.translate(9, 9);
         canvas.drawImage(map, Offset.zero, Paint());
       }
       canvas.restore();
@@ -88,7 +88,7 @@ class MapPainter extends CustomPainter {
         double centerY = map.height / 2;
         canvas.translate(centerX, centerY);
 
-        const resolution = 0.05000000074505806;
+        const resolution = 0.05;
 
         //Siatka do debugowania pozycji na mapie
         //region
