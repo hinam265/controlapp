@@ -2,6 +2,8 @@ import 'package:controlapp/providers/mapprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_performance/firebase_performance.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'providers/appstateprovider.dart';
 import 'providers/settingsprovider.dart';
@@ -12,6 +14,11 @@ import 'screens/mainpage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  FirebasePerformance performance = FirebasePerformance.instance;
+
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => SettingsProvider()),

@@ -1,4 +1,4 @@
-import 'package:controlapp/models/odometry.dart';
+import 'package:controlapp/messages/odometry.dart';
 // import 'package:controlapp/models/waypoint.dart';
 
 import 'package:provider/provider.dart';
@@ -64,16 +64,16 @@ class MapPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.save();
     {
-      canvas.scale(-1, -1);
+      canvas.scale(-2, 2);
       // canvas.translate(0, map.height.toDouble());
 
-      canvas.translate(map.width / 2, map.height / 2.5);
+      canvas.translate(map.width / 2, map.height / 2);
       canvas.rotate(radians(180));
 
-      canvas.translate(-map.width / 2, -map.height / 2);
+      // canvas.translate(-map.width / 2, -map.height / 2);
 
-      canvas.scale(1, -1);
-      canvas.translate(0, -map.height.toDouble());
+      // canvas.scale(1, -1);
+      canvas.translate(0, -map.height.toDouble() / 2);
 
       canvas.save();
       {

@@ -35,8 +35,11 @@ dependencies:
   material_design_icons_flutter: ^7.0.7296
   firebase_core: ^2.29.0
   firebase_database: ^10.2.0
+  firebase_performance: ^0.9.4
   vector_math: ^2.1.4
   image: ^4.1.7
+  firebase_crashlytics: ^3.5.4
+  firebase_analytics: ^10.10.4
 
 dev_dependencies:
   flutter_test:

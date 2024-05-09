@@ -4,6 +4,7 @@ import 'package:controlapp/components/controlpad.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:controlapp/screens/mappage.dart';
 import 'package:flutter/widgets.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 
 class ControlPage extends StatelessWidget {
   ControlPage({super.key});
@@ -78,6 +79,5 @@ class _JoystickConfigurationPortrait extends StatelessWidget {
 
 void joystickMove(Offset offset, BuildContext context) {
   final cmdVel = FirebaseDatabase.instance.ref().child('cmd_vel');
-
-  cmdVel.set({'linear': -offset.dy * 0.4, 'angular': -offset.dx});
+  cmdVel.set({'linear': -offset.dy * 0.4, 'angular': -offset.dx * 0.8});
 }

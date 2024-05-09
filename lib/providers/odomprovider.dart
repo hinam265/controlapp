@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:controlapp/models/odometry.dart';
+import 'package:controlapp/messages/odometry.dart';
 
 class OdomMsgProvider extends ChangeNotifier {
   Odometry? _odometry;

@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:controlapp/models/occupancygrid.dart';
+import 'package:controlapp/messages/occupancygrid.dart';
 
 extension CallMeBritney on OccupancyGrid {
   Uint8List toRGBA({required Color border, required Color fill}) {

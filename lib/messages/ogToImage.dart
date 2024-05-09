@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
-import 'package:controlapp/models/occupancygrid.dart';
-import 'package:controlapp/models/mapmsgextension.dart';
+import 'package:controlapp/messages/occupancygrid.dart';
+import 'package:controlapp/messages/mapmsgextension.dart';
 
 Future<ui.Image> getMapAsImage(
     final OccupancyGrid og, final Color fill, final Color border) {

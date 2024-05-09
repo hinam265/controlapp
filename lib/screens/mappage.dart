@@ -4,10 +4,10 @@ import 'package:controlapp/components/mappainter.dart';
 import 'package:controlapp/providers/mapprovider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:controlapp/models/ogToImage.dart';
+import 'package:controlapp/messages/ogToImage.dart';
 
-// import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -17,6 +17,8 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
+  // Trace gridMapTrace = FirebasePerformance.instance.newTrace('gridMapTrace');
+
   ui.Image? previousMap;
 
   @override
@@ -35,6 +37,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   )
                 : InteractiveViewer(
                     maxScale: 10,
+                    minScale: 0.1,
                     child: SizedBox(
                       width: double.infinity,
                       child: Center(
@@ -48,7 +51,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               previousMap = img.data;
                               return img.data == null
                                   ? const CircularProgressIndicator()
-                                  : Map(map: img.data!, showGrid: false);
+                                  : Map(map: img.data!, showGrid: true);
                             }),
                       ),
                     ),
