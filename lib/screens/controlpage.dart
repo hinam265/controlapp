@@ -78,13 +78,3 @@ void joystickMove(Offset offset, BuildContext context) {
   final cmdVel = FirebaseDatabase.instance.ref().child('cmd_vel');
   cmdVel.set({'linear': -offset.dy * 0.4, 'angular': -offset.dx * 0.8});
 }
-
-void tracePromise(trace, promise) {
-  trace.start();
-  promise.then(()=>trace.stop()).catch(()=>trace.stop());
-}
-
-void tracePromise(Trace trace, Future promise) {
-  trace.start();
-  promise.then((_) => trace.stop()).catchError((_) => trace.stop());
-}
